@@ -3,6 +3,7 @@
 angularをdockderコンテナの中で動かしてみようってやつ。buildしたファイルをコンテナに送って、それをexpressでホスティングしてコンテナ外に8000ポートで接続してる。さらにそれをnginxでプロキシしてる。nginxは8080でlistenして、angularの8000を見に行く仕様。
 
 ## 動かし方
+### docker-composeなし
 
 ```
 # angularのbuildとdockerのbuild、nginxのbuild全部やってくれる
@@ -15,6 +16,13 @@ $ make angualar/build
 $ make run
 ```
 これでコンテナ内に8000ポートのangularと8080のnginxが立ち上がってそれをコンテナ外に接続できる。コンテナ間の通信もこれでいける。
+
+### docker-composeあり
+
+```
+$ docker-compose up (-d) # -d はdaemon実行であってもなくてもいい
+```
+
 
 ## Advance
 
