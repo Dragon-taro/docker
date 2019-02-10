@@ -2,10 +2,13 @@ var express = require('express')
 var app = express();
 var http = require('http').Server(app);
 var io = require('socket.io')(http);
+var redis = require('socket.io-redis');
 
 app.get('/', function (req, res) {
     res.sendFile(__dirname + '/index.html');
 });
+
+io.adapter(redis({ host: 'redis', port: 6379 }));
 
 io.on('connection', function (socket) {
     socket.on('chat message', function (msg) {
