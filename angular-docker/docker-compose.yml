@@ -1,0 +1,12 @@
+version: '2'
+services:
+  angular:
+    build: .
+    ports:
+      - "8000:8000"
+  nginx:
+    build: ./nginx/
+    ports:
+      - "8080:80"
+    links:
+      - "angular:ng"
