@@ -1,11 +1,18 @@
-build:
+ws/build:
 	docker build ./ -t websocket
 
-run:
+ws/run:
 	docker run -it --rm -d --name websocket --link redis:redis -p 3000:3000 websocket
 
-kill:
+ws/kill:
 	docker kill websocket
 
-exec:
+ws/exec:
 	docker exec -it websocket /bin/bash
+
+start: server/static/js/bundle.js
+	docker-compose up -d
+
+server/static/js/bundle.js:
+	npm i
+	npm run build
